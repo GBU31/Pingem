@@ -1,5 +1,6 @@
 import tkinter as tk
 from core.isconnected import IsConnected
+from core.settings import  *
 import os
 from datetime import datetime
 from scapy.all import srp,Ether,ARP,conf 
@@ -11,12 +12,12 @@ class App:
         def notify():
             msg = f"{self.e1.get()} is connected !"
             os.system(f'zenity --info --title="Show All" --text="{msg}" --no-wrap')
-            # os.system(f'notify-send -u critical "{msg}" ')
+           
 
         if IsConnected(self.e1.get()).isconnected():
             notify()
 
-    def Show_All(self, interface='wlp36s0b1', ips='192.168.1.0/24'):
+    def Show_All(self, interface=interface, ips=ips):
         
         start_time = datetime.now()
 
@@ -40,6 +41,7 @@ class App:
 
     def run_app(self):
         master = tk.Tk()
+        master.title("PingHim")
         tk.Label(master, text="ip").grid(row=0)
         master.geometry('400x150')
 
