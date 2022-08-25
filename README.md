@@ -1,5 +1,6 @@
-# Run
+```
 sudo python3 main.py app
+```
 
 
 ![pinghim](https://user-images.githubusercontent.com/86805843/186752187-b3240c62-55bb-401e-8f3a-5ac8ea995ea5.png)
