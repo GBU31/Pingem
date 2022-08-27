@@ -1,7 +1,7 @@
 import  os
 
 class IsConnected:
-    def __init__(self, ip:str, **kwargs):
+    def __init__(self, ip:str, **kwargs) -> bool:
         self.ip = ip
 
     def isconnected(self):
