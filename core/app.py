@@ -9,13 +9,17 @@ from scapy.all import srp,Ether,ARP,conf
 
 class App:
     def ping(self):
-        def notify():
-            msg = f"{self.e1.get()} is connected !"
-            os.system(f'zenity --info --title="Show All" --text="{msg}" --no-wrap')
-           
-
         if IsConnected(self.e1.get()).isconnected():
-            notify()
+            on_conn()
+            self.zenity(msg=f"{self.e1.get()} is connected !")
+
+
+    def notify(self, msg, **kwargs):
+        os.system(f'notify-send -u low "{msg}" ')
+
+    def zenity(self, msg, **kwargs):
+        os.system(f'zenity --info --title="Show All" --text="{msg}" --no-wrap')
+
 
     def Show_All(self, interface=interface, ips=ips):
         
@@ -28,7 +32,8 @@ class App:
                     iface = interface,
                     inter = 0.1)
         except:
-            os.system(f'notify-send -u low "Permission Error" ')
+            self.notify(msg="Permission Error")
+            
 
 
         output = "\n[*] IP - MAC\n"
