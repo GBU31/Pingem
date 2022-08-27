@@ -1,5 +1,5 @@
 ```
-./main.py app
+./main.py app or ./main.py text 127.0.0.1
 ```
 
 # Show all devices
