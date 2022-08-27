@@ -1,5 +1,5 @@
 ```
-sudo python3 main.py app
+./main.py app
 ```
 
 # Show all devices
