@@ -36,7 +36,7 @@ class App:
             
 
 
-        output = "\n[*] IP - MAC\n"
+        output = "\n IP - MAC\n"
         for snd,rcv in ans: 
             output += rcv.sprintf(r"%ARP.psrc% - %Ether.src%\n")
         stop_time = datetime.now()
