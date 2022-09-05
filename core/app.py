@@ -1,16 +1,15 @@
 import tkinter as tk
 from core.isconnected import IsConnected
-from core.settings import  *
+from core.settings.settingsApp import  *
 import os
 from datetime import datetime
 from scapy.all import srp,Ether,ARP,conf 
 
     
 
-class App:
+class App(SettingsApp):
     def ping(self):
         if IsConnected(self.e1.get()).isconnected():
-            on_conn()
             self.zenity(msg=f"{self.e1.get()} is connected !")
 
 
@@ -20,19 +19,19 @@ class App:
     def zenity(self, msg, **kwargs):
         os.system(f'zenity --info --title="Show All" --text="{msg}" --no-wrap')
 
+    
+    def Show_All(self):
 
-    def Show_All(self, interface=interface, ips=ips):
-        
         start_time = datetime.now()
 
         conf.verb = 0 
         try:
-            ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = ips), 
+            ans, unans = srp(Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst = self.settings_file()[0]), 
                     timeout = 2, 
-                    iface = interface,
+                    iface = self.settings_file()[1],
                     inter = 0.1)
-        except:
-            self.notify(msg="Permission Error")
+        except Exception as err:
+            self.notify(msg=err)
             
 
 
@@ -62,6 +61,7 @@ class App:
                 command=master.quit).grid(row=3, column=0, sticky=tk.W, pady=4)
         tk.Button(master, text='Run', command=self.ping).grid(row=3, column=1,  sticky=tk.W, pady=4)
         tk.Button(master, text='Show All', command=self.Show_All).grid(row=3, column=2,  sticky=tk.W, pady=4)
+        tk.Button(master, text='Settings', command=SettingsApp().run_app).grid(row=4, column=2,  sticky=tk.W, pady=4)
 
         master.mainloop()
 
